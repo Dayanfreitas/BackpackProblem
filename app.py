@@ -1,12 +1,7 @@
-#Chromosomes
 from model.DNA import DNA
-
-#População
-from model.Individual import Individual
-from model.Population import Population
-
 from Evaluator import Evaluator
 from Factory import Factory
+from Helper import Helper
 
 DNA_strand = [
     DNA('Saco de dormir', 15, 15), 
@@ -19,18 +14,11 @@ DNA_strand = [
 
 
 factory = Factory(DNA_strand)
-first_population = factory.create_population()
+population = factory.create_population()
+Helper.display_population(population)
 
-print("\n\n\n")
-print(f"População : {first_population}")
-for individual in first_population.list_individual:
-    genome_backpack = individual.chromosomes.chain.get('mochila')
-    
-    print(f"Individual #{individual.id}")
-    for dna in genome_backpack.dna_strand:
-        print(dna)
-    print("-"*10)
-    print(f"\t\t KG: {genome_backpack.weight}\t\t Pontos: {genome_backpack.points}")
-    print("\n\n\n")
+population.modify_population([])
+Helper.display_population(population)
 
-
+population.modify_population([])
+Helper.display_population(population)
