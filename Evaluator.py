@@ -1,23 +1,40 @@
 from functools import reduce
+from Helper import Helper
+import time
 
 class Evaluator:
     def __init__(self, population):
         self.population = population
+        self.sum_of_fitness = 0
+        self.previous_probability = 0.0
         self.finish = False
     
-    def process_better_individual(self):
-        # print(f"POPULAÇÃO {self.population.generation} -- {self.population}")
-        print(self.population)
+    # def get_sum_of_fitness(population):
+    #     pass
 
-        for individual in self.population.list_individual:
+    def process_better_individual(self):
+        Helper.display_population(self.population)
+        self.fitness()
+        
+        # for x in range(0, 2):
+        # # print(f"POPULAÇÃO {self.population.generation} -- {self.population}")
+        # print(self.population)
+
+        # for individual in self.population.list_individual:
             
-            self.process_backpack(individual.chromosomes.chain.get('mochila'))
+        #     self.process_backpack(individual.chromosomes.chain.get('mochila'))
             
-            individual.points = self.fitness(individual.chromosomes.chain.get('mochila'))
+        #     individual.points = self.fitness(individual.chromosomes.chain.get('mochila'))
             
-            print(individual)
+        #     print(individual)
 
         return
+
+    def mutation(self):
+        pass
+    
+    def selection(self):
+        pass
 
     def process_backpack(self, chromosomes_backpack):
         print("\n")
@@ -32,6 +49,32 @@ class Evaluator:
 
         return 
 
+    def calc_total_fitness(self):
+        for individual in self.population.list_individual:
+            gene_backpack = individual.chromosomes.chain.get('mochila')
+            self.sum_of_fitness += gene_backpack.weight
+            # print(f"sum_of_fitness: {self.sum_of_fitness}")
+
+    def calc_previous_probability(self, weight):
+        fitness = self.previous_probability + (weight / self.sum_of_fitness)
+        self.previous_probability = fitness
+        return fitness
+
+    def fitness(self):
+        print("> Fitness")
+        time.sleep(2)
+        print("\n\n")
+        self.calc_total_fitness()
+        for individual in self.population.list_individual:
+            gene_backpack = individual.chromosomes.chain.get('mochila')
+            individual.probability = self.calc_previous_probability(gene_backpack.weight)
+            print(f"ID#{individual.id} | Probability# {individual.probability} | Fitness# {self.previous_probability}")
+
+    def pick_up_individual_with_probability(self, probability):
+        pass
+    
+
+    
     @staticmethod
     def sum_points(a, b):
         if b.contains:
@@ -44,17 +87,6 @@ class Evaluator:
             return a + b.weight
 
         return a
- 
-    @staticmethod
-    def fitness(individual):
-        print("Fitness !!!")
-        # points = individual.chromosomes.chain.get('mochila').points
-        weight = individual.chromosomes.chain.get('mochila').weight
-        
-        if weight > 30 or weight < 0:
-            return False
-        
-        return True
 
     @staticmethod
     def calulate_points(individual):
@@ -82,4 +114,9 @@ class Evaluator:
         print(f"genome_backpack.points {genome_backpack.points}")
         print(f"genome_backpack.weight {genome_backpack.weight}")
 
-        return Evaluator.fitness(individual)
+        if genome_backpack.weight > genome_backpack.load_limit or genome_backpack.weight <= 0:
+            return False
+        
+        return True
+
+        # return Evaluator.fitness(individual)

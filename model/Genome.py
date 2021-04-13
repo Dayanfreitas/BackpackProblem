@@ -1,8 +1,10 @@
 
 class Genome:
-    def __init__(self, name, dna_strand):
+    def __init__(self, name, dna_strand, load_limit):
         self.name = name 
         self.dna_strand = dna_strand
+        self.load_limit = load_limit
+        
         self.points = None
         self.weight = None
 

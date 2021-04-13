@@ -17,7 +17,7 @@ class Factory:
     def create_individual():
         print("Create Individual...")
         chromosomes = Chromosomes()
-        chromosomes.add_gene(Genome('mochila', copy.deepcopy(Factory.DNA_strand)))
+        chromosomes.add_gene(Genome('mochila', copy.deepcopy(Factory.DNA_strand), 30))
 
         individual = Individual(chromosomes)
         Factory.process_backpack(individual.chromosomes.chain.get('mochila'))

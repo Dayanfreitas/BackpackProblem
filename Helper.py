@@ -25,13 +25,15 @@ class Helper:
     def display_population(population):
         print("\n\n\n")
         print(f"População : {population}")
-        for individual in population.list_individual:
+        for num, individual in enumerate(population.list_individual, start= 1):
             genome_backpack = individual.chromosomes.chain.get('mochila')
-            
-            print(f"Individual #{individual.id}")
+            print(f"{num} - Individuo #{individual.id}")
+
             for dna in genome_backpack.dna_strand:
                 print(dna)
+
             print("-"*10)
+
             print(f"\t\t KG: {genome_backpack.weight}\t\t Pontos: {genome_backpack.points}")
             print("\n\n\n")
 

@@ -15,10 +15,14 @@ DNA_strand = [
 
 factory = Factory(DNA_strand)
 population = factory.create_population()
-Helper.display_population(population)
 
-population.modify_population([])
-Helper.display_population(population)
+evaluator = Evaluator(population)
+evaluator.process_better_individual()
 
-population.modify_population([])
-Helper.display_population(population)
+# Helper.display_population(population)
+
+# population.modify_population([])
+# Helper.display_population(population)
+
+# population.modify_population([])
+# Helper.display_population(population)
