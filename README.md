@@ -12,13 +12,10 @@ sobrevivência, cada um possui "pontos de sobrevivência" (dados para cada item 
 
     Existe algumas formas de iniciar um população, podendo ser aleatório,Heurística e etc.  
     No algoritmo para da inicio a população foi ultilizado o método aleatório.
-    
 
-2. Cálculo de aptidão (Fitness)
+## 2. Cálculo de aptidão (Fitness)
 
-3. Seleção:
-    Aleatória
-    Por Torneio
+## 3. Seleção:
     Usando a roleta
 
 4. Cruzamento(Crossover)
