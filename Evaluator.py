@@ -53,11 +53,11 @@ class Evaluator:
         Helper.loading()
         for individual in self.population.list_individual:
             gene_backpack = individual.chromosomes.chain.get('mochila')
-            self.sum_of_fitness += gene_backpack.weight
+            self.sum_of_fitness += gene_backpack.points
             # print(f"sum_of_fitness: {self.sum_of_fitness}")
 
-    def calc_previous_probability(self, weight):
-        fitness = self.previous_probability + (weight / self.sum_of_fitness)
+    def calc_previous_probability(self, points):
+        fitness = self.previous_probability + (points / self.sum_of_fitness)
         self.previous_probability = fitness
         return fitness
 
@@ -67,13 +67,14 @@ class Evaluator:
 
         self.calc_total_fitness()
         Helper.loading()
-        
 
         print("\n\n")
+        print("Tabela individios vs probabilidade")
+
         for individual in self.population.list_individual:
             gene_backpack = individual.chromosomes.chain.get('mochila')
-            individual.probability  = self.calc_previous_probability(gene_backpack.weight)
-            print(f"ID#{individual.id} | Probability# {individual.probability} | {self.sum_of_fitness}")
+            individual.probability  = self.calc_previous_probability(gene_backpack.points)
+            print(f"ID#{individual.id} \t| Probability# {individual.probability}")
 
     def pick_up_individual_with_probability(self, probability):
         pass
