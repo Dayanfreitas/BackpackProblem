@@ -1,7 +1,16 @@
 from functools import reduce
 import random
+import time
 
 class Helper:
+    @staticmethod
+    def loading ():
+        time.sleep(2)
+        print(".")
+        time.sleep(2)
+        print(".")        
+        time.sleep(2)
+        print(".")        
 
     def is_valid_point ():
         pass

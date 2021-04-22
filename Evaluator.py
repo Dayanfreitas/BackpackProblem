@@ -1,6 +1,5 @@
 from functools import reduce
 from Helper import Helper
-import time
 
 class Evaluator:
     def __init__(self, population):
@@ -50,6 +49,8 @@ class Evaluator:
         return 
 
     def calc_total_fitness(self):
+        print("+- Calculando o Fitness total da população")
+        Helper.loading()
         for individual in self.population.list_individual:
             gene_backpack = individual.chromosomes.chain.get('mochila')
             self.sum_of_fitness += gene_backpack.weight
@@ -61,20 +62,23 @@ class Evaluator:
         return fitness
 
     def fitness(self):
-        print("> Fitness")
-        time.sleep(2)
-        print("\n\n")
+        print("+ Calculando Fitness")
+        print("|")
+
         self.calc_total_fitness()
+        Helper.loading()
+        
+
+        print("\n\n")
         for individual in self.population.list_individual:
             gene_backpack = individual.chromosomes.chain.get('mochila')
-            individual.probability = self.calc_previous_probability(gene_backpack.weight)
-            print(f"ID#{individual.id} | Probability# {individual.probability} | Fitness# {self.previous_probability}")
+            individual.probability  = self.calc_previous_probability(gene_backpack.weight)
+            print(f"ID#{individual.id} | Probability# {individual.probability} | {self.sum_of_fitness}")
 
     def pick_up_individual_with_probability(self, probability):
         pass
     
 
-    
     @staticmethod
     def sum_points(a, b):
         if b.contains:
