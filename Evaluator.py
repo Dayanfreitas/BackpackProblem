@@ -1,5 +1,6 @@
 from functools import reduce
 from Helper import Helper
+import random
 
 class Evaluator:
     def __init__(self, population):
@@ -14,26 +15,44 @@ class Evaluator:
     def process_better_individual(self):
         Helper.display_population(self.population)
         self.fitness()
-        
-        # for x in range(0, 2):
-        # # print(f"POPULAÇÃO {self.population.generation} -- {self.population}")
-        # print(self.population)
-
-        # for individual in self.population.list_individual:
-            
-        #     self.process_backpack(individual.chromosomes.chain.get('mochila'))
-            
-        #     individual.points = self.fitness(individual.chromosomes.chain.get('mochila'))
-            
-        #     print(individual)
-
+        [a,b] = self.selection()
+        self.mutation(a, b)
         return
 
-    def mutation(self):
+    def roulette(self):
+        point = random.random()
+        interval = {'a': None, 'b': None }
+
+        for index, individual in enumerate(self.population.list_individual, start=0):
+            if index == 0:
+                interval['a'] = 0
+            else:
+                previous = self.population.list_individual[index - 1]
+                interval['a'] = previous.probability
+
+            interval['b'] = individual.probability
+
+            if point > interval['a'] and point <= interval['b']:
+                return [individual, index]
+            
+    def mutation(self, a, b):
+        print("> Mutação....")
+
+        print(f"{a.get('DNA')}")
+        print(f"{b.get('DNA')}")
+        
+        print(f"{a.get('index')}")
+        print(f"{b.get('index')}")
         pass
     
     def selection(self):
-        pass
+        [individualA, indexA] = self.roulette()
+        [individualB, indexB] = self.roulette()
+        
+        gene_backpackA = individualA.chromosomes.chain.get('mochila').dna_strand
+        gene_backpackB = individualB.chromosomes.chain.get('mochila').dna_strand
+        
+        return [{'DNA': gene_backpackA, 'index': indexA}, {'DNA': gene_backpackB, 'index': indexB}]
 
     def process_backpack(self, chromosomes_backpack):
         print("\n")
@@ -50,7 +69,7 @@ class Evaluator:
 
     def calc_total_fitness(self):
         print("+- Calculando o Fitness total da população")
-        Helper.loading()
+        # Helper.loading()
         for individual in self.population.list_individual:
             gene_backpack = individual.chromosomes.chain.get('mochila')
             self.sum_of_fitness += gene_backpack.points
@@ -66,7 +85,7 @@ class Evaluator:
         print("|")
 
         self.calc_total_fitness()
-        Helper.loading()
+        # Helper.loading()
 
         print("\n\n")
         print("Tabela individios vs probabilidade")
@@ -75,6 +94,7 @@ class Evaluator:
             gene_backpack = individual.chromosomes.chain.get('mochila')
             individual.probability  = self.calc_previous_probability(gene_backpack.points)
             print(f"ID#{individual.id} \t| Probability# {individual.probability}")
+        # Helper.display_population(self.population)
 
     def pick_up_individual_with_probability(self, probability):
         pass

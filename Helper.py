@@ -36,7 +36,7 @@ class Helper:
         print(f"População : {population}")
         for num, individual in enumerate(population.list_individual, start= 1):
             genome_backpack = individual.chromosomes.chain.get('mochila')
-            print(f"{num} - Individuo #{individual.id}")
+            print(f"{num} - Individuo #{individual.id} - {individual.probability}")
 
             for dna in genome_backpack.dna_strand:
                 print(dna)

@@ -18,11 +18,3 @@ population = factory.create_population()
 
 evaluator = Evaluator(population)
 evaluator.process_better_individual()
-
-# Helper.display_population(population)
-
-# population.modify_population([])
-# Helper.display_population(population)
-
-# population.modify_population([])
-# Helper.display_population(population)

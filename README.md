@@ -14,12 +14,12 @@ sobrevivência, cada um possui "pontos de sobrevivência" (dados para cada item 
     No algoritmo para da inicio a população foi ultilizado o método aleatório.
 
 ## 2. Cálculo de aptidão (Fitness)
+    O cálculo de aptidão está sendo feito baseado no pontuação.
 
 ## 3. Seleção:
     Usando a roleta
 
-4. Cruzamento(Crossover)
-
+## 4. Cruzamento(Crossover)
     - Aleatório:  
         Cromossomo A = [1 ,2 ,3 ,4 ,5]  
         Cromossomo B = [6 ,7, 8, 9, 10]
@@ -29,9 +29,8 @@ sobrevivência, cada um possui "pontos de sobrevivência" (dados para cada item 
         [6, 7, 8, 3, 4 , 5]
 
     - Single arithimetic Crossover
-
     - Partially
     - Pegando sub string
 
-5. Mutação
+## 5. Mutação
     - Probabilidade de 1 %
